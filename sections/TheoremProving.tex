@@ -1,0 +1,44 @@
+The deductive verification framework used in this work is based on~\cite{peled2001model}.
+It is developed on top of the two-valued model checker described in Section~\ref{sec:mcComplete}.
+Given a structure $M$ and an LTL property $\phi$, which is satisfied by $M$, the deductive verification framework produces a proof which explains why $M \models \phi$.
+The algorithm considers the intersection automaton $\mathcal{G}=M\otimes\mathcal{A}_{\lnot\phi}$.
+
+The approach described in the following is built on three elements.
+\begin{enumerate*}
+\item every state $q\in Q$ of $\mathcal{A}_{\lnot\phi}$ is associated with an LTL formula $\eta(q)$ such that, for every accepting run $\sigma=q_0,q_1,...$ of $\mathcal{G}$, $\sigma_i\models\eta(q_i)$. This formula is computed during the procedure that converts the LTL formula $\neg \phi$ into $\mathcal{A}_{\lnot\phi}$~\cite{gerth1996ltl2ba}. For instance, the state $q_1$ of the automaton presented in Figure~\ref{fig:property} is associated with the formula $\eta(q_1)= \lnot g \LTLand \LTLnext \LTLglobally \lnot g$;
+\item given a state $\langle s, q \rangle$ of the automaton $M\otimes\mathcal{A}_{\lnot\phi}$, the property $\eta(q)$ associated with the state $q$ of $\mathcal{A}_{\lnot\phi}$ is \emph{not} satisfied in $s$. 
+Indeed, if $\eta(q)$ was satisfied, a counterexample would be found.
+Thus, the negation $\mu(q)$ of $\eta(q)$ holds in $s$;
+\item each node $\langle s, q \rangle$  which was not created during the computation of $M\otimes\mathcal{A}_{\lnot\phi}$, is such that $s$ does not satisfy $\eta(q)$, i.e., $s \models \mu(q)$.
+Each of these nodes, called \emph{failed node}, causes a failure in the search of a counterexample and ensures the satisfaction of $\phi$ in the corresponding state of the system.
+\end{enumerate*}
+
+The deductive verification framework first enriches the product automaton $M\otimes\mathcal{A}_{\lnot\phi}$ by considering also failed nodes as part of it.
+Each failed node is a node in which the search of a counterexample has failed. 
+Thus,  given a failed node $\langle t,p \rangle$,  we can write the failure axiom $t\models \mu(p)$.
+For example, the node $\langle s_1, q_1 \rangle$ of the intersection automaton presented in Figure~\ref{fig:productOpt} is a failed node since $s_1$ satisfies the property $\mu(q_1)= g \LTLor \LTLnext \LTLfinally g$ associated with the state $q_1$.
+
+Then, a set of deductive rules is applied to produce the proof, specifically:
+\begin{enumerate*}
+\item \emph{Successors rule.} Given a state $\langle s, q\rangle$ of the intersection automaton, if for each of its successors $\langle s_i, q_j\rangle$ the state $s_i$ of $M$ satisfies the formula $\mu(q_j)$, then also $s$ satisfies $\mu(q)$.
+Intuitively, the rule is based on two observations.
+First, each successor  $\langle s_i, q_j\rangle$ of  $\langle s, q\rangle$ does not cause a violation of $\phi$, i.e., it ensures that $s_i \models \mu(q_j)$.
+Second, by moving from $\langle s, q\rangle$ to $\langle s_i, q_j\rangle$ the system has not violated the property of interest, since no counterexample was found.
+Thus, it must be that $s$ satisfies $\mu(q)$.
+\item \emph{Induction rule.} It is a generalization of the successors rule applied on strongly connected components (SCCs). 
+Given a strongly connected component $\mathcal{X}$, let us identify with $Exit(\mathcal{X})$ the set of all nodes $\langle s_i, q_j\rangle$ that do not belong to $\mathcal{X}$ and have an incoming transition from a source node in $\mathcal{X}$.
+If every node $\langle s_i, q_j\rangle \in Exit(\mathcal{X})$ is such that $s_i \models \mu(q_j)$, we can conclude that, for every node $\langle s, q \rangle \in \mathcal{X}$, $s \models \mu(q)$ holds.
+Intuitively, since all the ``successors'' of $\mathcal{X}$ (the nodes in $Exit(\mathcal{X})$) ensure the property satisfaction and the states in $\mathcal{X}$ do not violate the property of interest (no counterexample has been found in the intersection automaton), it must be that each state $s$ satisfies the corresponding property $\mu(q)$. 
+\item \emph{Conjunction rule.} It allows connecting any pair of conclusions made on a given state and making temporal logic interferences. 
+All the formulae computed for a given state $s$ are and-combined.
+\end{enumerate*}
+
+These rules are applied considering the partial ordering relation $\prec$ between SCCs. 
+The relation $\mathcal{X} \prec \mathcal{X}'$ holds if there exists a transition from some state in $\mathcal{X}$ to some state in $\mathcal{X}'$. 
+If $\mathcal{X} \prec \mathcal{X}'$, before considering the component  $\mathcal{X}$, it is necessary to compute the proof of $\mathcal{X}'$.
+
+Additional details can be found in the extended version of this paper.
+
+%The deductive verification procedure presented in this section modifies the one proposed in~\cite{peled2001model} by identifying the failed nodes as defined in Formula~\ref{eq:failedTransition}. 
+%Furthermore, it does not consider fairness conditions in the induction rule.
+%For additional details, the interested reader may refer to~\cite{peled2001model}.

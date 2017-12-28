@@ -1,0 +1,35 @@
+This section elaborates on the applicability of \NAME. 
+
+\emph{Three-valued vs thorough semantics.} As previously discussed, \NAME\ does not produce a useful result when a thorough semantics of LTL formulae is considered and a $?$ value is returned.
+Indeed, the property could be $\LTLtrue$, $?$ or $\LTLfalse$ w.r.t. the thorough semantics.
+The generalized model checking algorithm~\cite{bruns2000model}(which levies a performance penalty) could be used to discriminate between these cases.
+In \cite{gurfinkel2005thorough}, the authors analyze how often this additional check really helps.
+They show that whenever the model is built using predicate abstraction~\cite{graf1997construction}, the thorough check does not provide additional precision\footnote{The results of~\cite{gurfinkel2005thorough} are presented for CTL properties; however the authors specify that the results naturally extend to LTL.}.
+It is also argued that in many practically interesting cases, the thorough semantics is not more precise than the three-valued one. 
+For these reasons, \NAME\ can be usefully applied in most of the real world applications.
+
+\emph{Temporal patterns of self-minimization.} 
+\NAME\ always produces a correct result when the LTL formula is self-minimizing.
+In~\cite{godefroid2005MCvsGMC} the authors propose a first grammar for this LTL subset. 
+The grammar can be used by the designer to generate formulae that are (by construction) self-minimizing, or  to check whether a specific formula is self-minimizing, i.e., if the formula is compliant with the grammar, then it is self-minimizing.
+The authors also argue that the set of self-minimizing LTL formulae contains most of the properties of practical interest, such as absence, universality, existence, response and response chain. 
+The grammar presented in~\cite{godefroid2005MCvsGMC} is improved in~\cite{antonik2006efficient}, where the authors consider popular syntactic specification patterns, documented at a community-led pattern repository, and check whether the formulae that are compliant with these patterns are self-minimizing.
+It is shown that many such patterns are self-minimizing and that, the ones that are not, can be transformed with linear blowup into a self-minimizing LTL formula.
+Thus, in most cases, the designer will consider a formula that is self-minimizing. A syntactic check can be used to prove self-minimization before running \NAME .
+
+\emph{Checking whether an LTL formula is self-minimizing.} Checking whether an LTL formula is self-minimizing (if it is not compliant with one of the syntactic patterns) is expensive, since it requires to compute an automaton that is exponential in $|\phi|$~\cite{godefroid2005MCvsGMC}. 
+However, if $\phi$ satisfies some constraints (sufficient conditions) then it is self-minimizing.
+For example, if it is in its negation normal form and no proposition occurs in mixed polarity, then $\phi$ is self-minimizing.
+These checks can be implemented in \NAME . Note that, some LTL formulae can be transformed into their equivalent self-minimizing version, but not all the LTL formulae have a semantic minimization in LTL~\cite{godefroid2005MCvsGMC}.
+
+\emph{Scalability.} Three-valued model checking is as expensive as classical model checking~\cite{bruns1999model}, which is commonly used to analyze real world problems~\cite{Woodcock:2009:FMP:1592434.1592436}.
+Deductive verification has been employed successfully in the verification of digital hardware and software systems~\cite{rajan1995integration}.
+However, there are inherent limits to the efficiency with which expressive general-purpose logics can be fully mechanized. 
+Two approaches have been proposed in literature to overcome this limitation:
+\begin{enumerate*}
+\item  using interactive deductive verification tools so that correctness proofs can be developed through a combination of user guidance and limited forms of automated deduction;
+\item considering useful fragments of logic that can be mechanized very effectively.
+\end{enumerate*}
+Since \NAME\ simply combines multi-valued model checking and theorem proving, its scalability improves  as the performance of the employed model checking and deductive verification  frameworks enhances.
+
+

@@ -1,0 +1,41 @@
+This section discusses how \NAME\ supports the designer in the development of the system that satisfies the properties of interest.
+We first consider the example introduced in Section~\ref{sec:motivating} w.r.t. property $\phi_2$. Then, properties $\phi_1$ and $\phi_3$ are also briefly discussed.
+
+
+\textbf{Property $\boldsymbol{\phi_2}$.} 
+The property $\phi_2=\LTLglobally \LTLfinally green$ specifies that green lights up infinitely often.
+Even if in state $s_1$ the green light is on, the property is ``only" possibly satisfied.
+\NAME\ returns the possible counterexample $(s_0, s_2)^\omega$, that shows why $\phi_2$ is possibly satisfied.
+Specifically,  by looping an infinite number of time on states $s_0$ and $s_2$ the green light will not be turned on.
+This is a possible counterexample since the value of the $green$ proposition in $s_2$ is currently unspecified.
+Since the property $\phi_2$ is possibly satisfied, the search of a definitive counterexample has failed.
+\NAME\ computes a proof that explains the motivation.
+To search for a counterexample, the intersection automaton $M_{opt}$ presented in Figure~\ref{fig:productOpt} is explored by \NAME\ during the proof computation. The obtained proof is presented in Table~\ref{table:proof}, where $g$ stands for $green$.
+The nodes that have been analyzed in different steps are circled  in Figure~\ref{fig:productOpt} through different grey frames.
+(\emph{Step1}). \NAME\ analyzes the failed nodes, i.e., the nodes in the set $Fail(I_{opt})$.
+Since in these nodes the search for a counterexample trivially fails, the formula associated with the corresponding states of $\mathcal{A}_{\lnot\phi_2}$ holds.
+Thus, since the state $\langle s_1, q_1 \rangle$ of the intersection automaton is a failed node, the formula $green \LTLor \LTLnext \LTLfinally green$ (valid in $q_1$) is satisfied by the model state $s_1$.
+This formula is effectively true in $s_1$ since the green light is on.
+By means of a similar reasoning, the algorithm states that the property  $green \LTLor \LTLnext \LTLfinally green$ also holds in $s_2$. Indeed, since in the optimistic model the green light is on in $s_2$, the search of a counterexample has failed in $\langle s_2, q_1 \rangle$.
+(\emph{Step2}). Since all the successors of $\langle s_0, q_1 \rangle$ satisfy $green \LTLor \LTLnext \LTLfinally green$, it is possible to deduce that this property is also satisfied in $s_0$.
+(\emph{Step3}). The induction rule is applied considering the strongly connected component  $\left \{ \langle s_0, q_0 \rangle, \langle s_1, q_0 \rangle, \langle s_2, q_0 \rangle \right \}$.
+The rule allows to conclude that $s_0$ satisfies the property $\LTLnext \LTLglobally \LTLfinally green$.
+(\emph{Step4}). \NAME\ applies the conjunction rule to $s_0$.
+Since $s_0$ satisfies both $\LTLnext \LTLglobally \LTLfinally green$ and $green \LTLor \LTLnext \LTLfinally green$, it is possibly to deduce that $s_0$ satisfies the property $\phi_2$.
+This provides an interesting insight to the designer: if she/he does her/his ``best" to satisfy the property (she/he turns the green light on in $s_2$) the property becomes satisfied. The proof clearly states why.
+
+
+\input{images/proofTable_2.tex}
+
+
+\textbf{Property $\boldsymbol{\phi_1}$.}
+The property $\phi_1=\LTLglobally \LTLfinally red$ specifies that red lights up infinitely often.
+The designer wants to know whether the model of Figure~\ref{fig:modelmot} satisfies $\phi_1$.
+Intuitively, it is sufficient to observe that the proposition $red$ is evaluated with $\LTLtrue$ in the state $s_0$ and that the system always returns to this state (after visiting either $s_1$ or $s_2$).
+\NAME\ returns $\LTLtrue$ as its verification result and produces a proof that highlights how and why a definite counterexample is not found in the graph. First, it identifies the nodes $\langle s_0, q_1 \rangle$ and $\langle s_2, q_1 \rangle$ as failed. The conclusions found on these nodes are propagated to the node $\langle s_1, q_1 \rangle$. All the successors of the SCC formed by the intersection states related to the property state $q_0$ are analyzed. Therefore conclusions are drawn also on this SCC. 
+The proof is not reported for brevity and it follows the same pattern as the one in Table~\ref{table:proof}.
+
+
+\textbf{Property $\boldsymbol{\phi_3}$.}
+$\LTLglobally (red \LTLimplication \LTLglobally green)$ cannot be satisfied by the chosen model. Therefore \NAME\ returns a definite counterexample, e.g. $(s_0, s_1)^\omega$.
+

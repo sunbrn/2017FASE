@@ -1,0 +1,149 @@
+\begin{thebibliography}{10}
+
+\bibitem{antonik2006efficient}
+A.~Antonik and M.~Huth.
+\newblock {Efficient patterns for model checking partial state spaces in CTL
+  $\cap$ LTL}.
+\newblock {\em Electronic Notes in Theoretical Computer Science}, 158:41--57,
+  2006.
+
+\bibitem{katoen2008}
+C.~Baier and J.-P. Katoen.
+\newblock {\em Principles of Model Checking}.
+\newblock The MIT Press, 2008.
+
+\bibitem{benevs2009checking}
+N.~Bene{\v{s}}, J.~K{\v{r}}et{\'\i}nsk{\`y}, K.~G. Larsen, and J.~Srba.
+\newblock Checking thorough refinement on modal transition systems is
+  exptime-complete.
+\newblock In {\em Theoretical Aspects of Computing}, pages 112--126. Springer,
+  2009.
+
+\bibitem{bruns1999model}
+G.~Bruns and P.~Godefroid.
+\newblock Model checking partial state spaces with 3-valued temporal logics.
+\newblock In {\em Computer Aided Verification}, pages 274--287. Springer, 1999.
+
+\bibitem{bruns2000model}
+G.~Bruns and P.~Godefroid.
+\newblock Generalized model checking: Reasoning about partial state spaces.
+\newblock In {\em International Conference on Concurrency Theory}, pages
+  168--182. Springer, 2000.
+
+\bibitem{bruns2004MCmultivalued}
+G.~Bruns and P.~Godefroid.
+\newblock Model checking with multi-valued logics.
+\newblock In {\em Automata, Languages and Programming}, pages 281--293.
+  Springer, 2004.
+
+\bibitem{clarke1995efficient}
+E.~M. Clarke, O.~Grumberg, K.~L. McMillan, and X.~Zhao.
+\newblock Efficient generation of counterexamples and witnesses in symbolic
+  model checking.
+\newblock In {\em Design Automation Conference}. ACM, 1995.
+
+\bibitem{clarke1999model}
+E.~M. Clarke, O.~Grumberg, and D.~Peled.
+\newblock {\em Model checking}.
+\newblock MIT press, 1999.
+
+\bibitem{gerth1996ltl2ba}
+R.~Gerth, D.~Peled, M.~Y. Vardi, and P.~Wolper.
+\newblock Simple on-the-fly automatic verification of linear temporal logic.
+\newblock In {\em Protocol Specification, Testing and Verification}, pages
+  3--18. Springer, 1996.
+
+\bibitem{godefroid2005MCvsGMC}
+P.~Godefroid and M.~Huth.
+\newblock Model checking vs. generalized model checking: semantic minimizations
+  for temporal logics.
+\newblock In {\em Logic in Computer Science}, pages 158--167. {IEEE} Computer
+  Society, 2005.
+
+\bibitem{godefroid2001abstraction}
+P.~Godefroid, M.~Huth, and R.~Jagadeesan.
+\newblock Abstraction-based model checking using modal transition systems.
+\newblock In {\em Concurrency Theory}, pages 426--440. Springer, 2001.
+
+\bibitem{godefroid2011ltl}
+P.~Godefroid and N.~Piterman.
+\newblock {LTL} generalized model checking revisited.
+\newblock {\em International journal on software tools for technology
+  transfer}, 13(6):571--584, 2011.
+
+\bibitem{graf1997construction}
+S.~Graf and H.~Sa{\"{\i}}di.
+\newblock Construction of abstract state graphs with {PVS}.
+\newblock In {\em Computer Aided Verification}, pages 72--83. Springer, 1997.
+
+\bibitem{gurfinkel2003multi}
+A.~Gurfinkel and M.~Chechik.
+\newblock Multi-valued model checking via classical model checking.
+\newblock In {\em Concurrency Theory}, pages 266--280. Springer, 2003.
+
+\bibitem{gurfinkel2003proof}
+A.~Gurfinkel and M.~Chechik.
+\newblock Proof-like counter-examples.
+\newblock In {\em In Tools and Algorithms for the Construction and Analysis of
+  Systems}, pages 160--175. Springer, 2003.
+
+\bibitem{gurfinkel2005thorough}
+A.~Gurfinkel and M.~Chechik.
+\newblock How thorough is thorough enough?
+\newblock In {\em Correct Hardware Design and Verification Methods}, pages
+  65--80. Springer, 2005.
+
+\bibitem{Kripke1963-KRISCO}
+S.~A. Kripke.
+\newblock Semantical considerations on modal logic.
+\newblock {\em Acta Philosophica Fennica}, 16(1963):83--94, 1963.
+
+\bibitem{larsen1988modal}
+K.~G. Larsen and B.~Thomsen.
+\newblock A modal process logic.
+\newblock In {\em Logic in Computer Science}, pages 203--210. IEEE, 1988.
+
+\bibitem{manna2012temporal}
+Z.~Manna and A.~Pnueli.
+\newblock {\em The temporal logic of reactive and concurrent systems:
+  Specification}.
+\newblock Springer, 1992.
+
+\bibitem{namjoshi2001certifying}
+K.~S. Namjoshi.
+\newblock Certifying model checkers.
+\newblock In {\em Computer Aided Verification}, pages 2--13. Springer, 2001.
+
+\bibitem{peled2001falsification}
+D.~Peled, A.~Pnueli, and L.~Zuck.
+\newblock From falsification to verification.
+\newblock In {\em Foundations of Software Technology and Theoretical Computer
+  Science}, pages 292--304. Springer, 2001.
+
+\bibitem{peled2001model}
+D.~Peled and L.~Zuck.
+\newblock From model checking to a temporal proof.
+\newblock In {\em International SPIN workshop on Model checking of software},
+  pages 1--14. Springer, 2001.
+
+\bibitem{pnueli1977temporal}
+A.~Pnueli.
+\newblock The temporal logic of programs.
+\newblock In {\em Foundations of Computer Science}, pages 46--57. IEEE, 1977.
+
+\bibitem{rajan1995integration}
+S.~Rajan, N.~Shankar, and M.~K. Srivas.
+\newblock An integration of model checking with automated proof checking.
+\newblock In {\em Computer Aided Verification}, pages 84--97. Springer, 1995.
+
+\bibitem{cleaveland2002evidence}
+L.~Tan and R.~Cleaveland.
+\newblock Evidence-based model checking.
+\newblock In {\em Computer Aided Verification}, pages 455--470. Springer, 2002.
+
+\bibitem{Woodcock:2009:FMP:1592434.1592436}
+J.~Woodcock, P.~G. Larsen, J.~Bicarregui, and J.~S. Fitzgerald.
+\newblock Formal methods: Practice and experience.
+\newblock {\em {ACM} {C}omputing {S}urveys}, 41(4), 2009.
+
+\end{thebibliography}

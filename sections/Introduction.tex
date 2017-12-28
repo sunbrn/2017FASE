@@ -1,0 +1,50 @@
+Several multi-valued model checking techniques, such as~\cite{bruns1999model,bruns2000model,gurfinkel2003multi,bruns2004MCmultivalued}, have been proposed to support the verification of models that are \emph{incomplete}.
+A model is incomplete whenever its state space is not fully specified.
+%i.e., it stands for a functionality that still needs to be refined.
+Three-valued model checking extends classical two-valued model checking by returning an additional \emph{maybe} value whenever the property satisfaction depends on how the incompleteness is removed.
+More precisely, a three-valued model checking algorithm returns one of the following values: \emph{true} if the property $\phi$ \emph{definitely holds} (it is satisfied regardless of how incomplete parts are refined), \emph{false} if $\phi$ \emph{does not hold} (a violating behavior which does not depend on the incomplete parts exists), and \emph{maybe} if $\phi$ \emph{possibly holds} (its satisfaction depends on the parts to be refined).
+
+In the classical context of two-valued model checking, algorithms do not provide the designer with enough information.
+Although a sample violating behavior is normally returned when the property is violated, no equally useful insight is provided if the property is proved to hold. 
+Indeed, in this case, it might be useful to receive a formal explanation of the reason \emph{why} the system satisfies the property.
+To achieve this goal, the verification framework can be equipped with a deductive verification engine that formally justifies why the model checking procedure has failed in the search of a counterexample by exploiting the state space generated during the search.
+Deductive verification algorithms have been developed for fully specified models~\cite{peled2001model,peled2001falsification}, but no known similar approach deals with incomplete models.
+This is a remarkable limitation in practical contexts based on incremental development, where the designer may start by providing an initial, high-level version of the model, which is iteratively narrowed down as design progresses and uncertainties are removed.
+Whenever the verification answer is true or maybe, the proof can be used by the designer as a guidance in the refinement process, and as a confirmation on the correctness of the design choices already performed. 
+In some cases, it may even suggest that actually the property does not capture the intended correctness condition, and it should be modified.
+For this reason the integration of deductive verification techniques in a multi-valued context can guide the designer towards a correct development.
+
+This paper proposes \NAME , a THRee valued Integrated Verification Engine for incomplete models.
+\NAME\ enriches model checking for incomplete models with a deductive verification engine that justifies whether the verified system definitely satisfies or possibly satisfies the property of interest.
+Whenever the property \emph{definitely holds}, the deductive verification approach proves that neither a definitely violating nor a possibly violating behavior can be found in the current instance of the model.
+If the property \emph{possibly holds}, the model checker returns a possible counterexample, which describes a possible behavior that violates the property. 
+In addition, the deductive verification engine returns to the designer a proof that specifies why a violating behavior cannot be found in the current model.
+Finally, whenever the property \emph{does not hold}, a counterexample which specifies a violating behavior is returned.
+
+We consider the model $M$ and the property $\phi$ expressed respectively as a Partial Kripke Structure (PKS)~\cite{bruns1999model} and a Linear Temporal Logic (LTL)~\cite{pnueli1977temporal} formula, but the proposed framework can be also extended to support other formalisms.
+The framework is founded on previous theoretical results~\cite{bruns2000model,godefroid2005MCvsGMC,godefroid2011ltl,peled2001model}, which have been modified to fit into the proposed approach. It exploits the formal definition of the three-valued semantics of LTL formulae over infinite words presented in~\cite{godefroid2011ltl} and uses a model checking algorithm---in line with the one presented in~\cite{bruns2000model,gurfinkel2003multi}.
+The model checking algorithm is equipped with a customization of the deductive verification framework proposed in~\cite{peled2001model}.
+We discuss the applicability of the proposed integrated verification environment considering the three-valued~\cite{bruns1999model} and the thorough~\cite{bruns2000model} LTL semantics.
+Furthermore, we also analyze the validity of \NAME\ over a particular subset of LTL formulae called self-minimizing~\cite{godefroid2005MCvsGMC} LTL formulae.
+
+%DELETED
+%It exploits the formal definition of the three-valued semantics of LTL formulae over infinite words presented in~\cite{godefroid2011ltl}, which is adapted for application to PKSs. 
+%Based on this semantics, we formally describe a model checking algorithm---in line with the one presented in~\cite{bruns2000model,gurfinkel2003multi}---.
+%Finally, the model checking algorithm is equipped with a customization of the deductive verification framework proposed in~\cite{peled2001model}.
+
+
+The benefits of the approach are evaluated using a simple semaphore example.
+The model of the semaphore is obtained by abstracting the one presented in~\cite{katoen2008} and is considered w.r.t. three LTL properties.
+\NAME\ helps the designer in understanding which choices of component design lead to (in)correct behavior of the system, and why some choices imply that a property definitely/possibly holds.
+This information provides the designer with good insights on how to refine/modify the model of the system.
+
+\begin{sloppypar}
+The rest of the paper is organized as follows. 
+Section~\ref{sec:motivating} introduces the semaphore example.
+Section~\ref{sec:preliminaries} presents the modeling formalisms, their properties and verification procedures upon which this work is based.
+Section~\ref{sec:contribution} describes \NAME.
+Section~\ref{sec:preliminaryEvaluation} evaluates the approach on the semaphore example.
+Section~\ref{sec:discussion} discusses the applicability of the approach.
+Section~\ref{sec:stateoftheart}  presents the related works.
+Finally, Section~\ref{sec:conclusions} concludes the paper.
+\end{sloppypar}
